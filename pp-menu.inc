@@ -203,11 +203,14 @@ static void:UpdateMenuListRowColourInternal(playerid, response, row) {
 }
 
 static void:UpdateMenuListRowsInternal(playerid, start = 0) {
-    for (new Iter:it = list_iter(gMenuItem[playerid], start), row, data[E_MENU_DATA], buffer[MAX_MENU_ITEM_LENGTH]; iter_inside(it); iter_move_next(it)) {
-        if (row >= MAX_MENU_PAGE_ROWS) {
-            break;
-        }
+    new
+        Iter:it = list_iter(gMenuItem[playerid], start),
+        row,
+        data[E_MENU_DATA],
+        buffer[MAX_MENU_ITEM_LENGTH]
+    ;
 
+    for (; iter_inside(it) && row != MAX_MENU_PAGE_ROWS; iter_move_next(it), ++row) {
         iter_get_arr(it, data);
 
         strunpack(buffer, data[E_MENU_L_COLUMN]);
@@ -217,8 +220,6 @@ static void:UpdateMenuListRowsInternal(playerid, start = 0) {
         strunpack(buffer, data[E_MENU_R_COLUMN]);
         PlayerTextDrawSetString(playerid, gMenuItemColumn2TextID[playerid][row], buffer);
         PlayerTextDrawShow(playerid, gMenuItemColumn2TextID[playerid][row]);
-
-        ++row;
     }
 }
 
