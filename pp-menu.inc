@@ -72,7 +72,8 @@ static
     gMenuItemSize[MAX_PLAYERS],
     gMenuRowCount[MAX_PLAYERS],
     gMenuListItem[MAX_PLAYERS],
-    gMenuCooldown[MAX_PLAYERS]
+    gMenuCooldown[MAX_PLAYERS],
+    bool:gMenuCancelSelectSound[MAX_PLAYERS]
 ;
 
 static
@@ -86,7 +87,7 @@ static
  */
 
 forward bool:AddItemToMenu(playerid, column, const format[], OPEN_MP_TAGS:...);
-forward bool:ShowMenuCallback(playerid, Func:cb<ii>, const format[], Float:x, Float:y, Float:width, OPEN_MP_TAGS:...);
+forward bool:ShowMenuCallback(playerid, Func:cb<ii>, const format[], Float:x, Float:y, Float:width, bool:cancelSelectSound = false, OPEN_MP_TAGS:...);
 forward bool:HideCurrentMenu(playerid);
 
 /**
@@ -282,7 +283,7 @@ stock bool:AddItemToMenu(playerid, column, const format[], OPEN_MP_TAGS:...) {
     return true;
 }
 
-stock bool:ShowMenuCallback(playerid, Func:cb<ii>, const format[], Float:x, Float:y, Float:width, OPEN_MP_TAGS:...) {
+stock bool:ShowMenuCallback(playerid, Func:cb<ii>, const format[], Float:x, Float:y, Float:width, bool:cancelSelectSound = false, OPEN_MP_TAGS:...) {
     if (!IsPlayerConnected(playerid)) {
         return false;
     }
@@ -297,6 +298,7 @@ stock bool:ShowMenuCallback(playerid, Func:cb<ii>, const format[], Float:x, Floa
     gMenuRowCount[playerid] = 0;
     gMenuListItem[playerid] = 0;
     gMenuItemSize[playerid] = (list_size(gMenuItem[playerid]) - 1);
+    gMenuCancelSelectSound[playerid] = cancelSelectSound;
 
     new
         buffer[MAX_MENU_TITLE_LENGTH]
@@ -352,7 +354,6 @@ hook OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys) {
 
             DestroyMenuTextDrawInternal(playerid);
             
-            PlayerPlaySound(playerid, MENU_SOUND_SELECT, 0.0, 0.0, 0.0);
             @.cb(MENU_RESPONSE_SELECT, gMenuListItem[playerid]);
         }
 
