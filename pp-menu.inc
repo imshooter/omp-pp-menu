@@ -308,7 +308,7 @@ stock bool:ShowMenuCallback(playerid, Func:cb<ii>, const format[], Float:x, Floa
         buffer,
         _,
         format,
-        ___(6)
+        ___(7)
     );
 
     CreateMenuTextDrawInternal(playerid, buffer, x, y, width);
