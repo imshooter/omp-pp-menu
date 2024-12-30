@@ -15,7 +15,7 @@ Include in your code and begin using the library:
 ### Functions
 
 * **`bool:`AddItemToMenu**`(playerid, column, const format[], OPEN_MP_TAGS:...)`
-* **`bool:`ShowMenuCallback**`(playerid, Func:cb<ii>, const format[], Float:x, Float:y, Float:width, OPEN_MP_TAGS:...)`
+* **`bool:`ShowMenuCallback**`(playerid, Func:cb<ii>, const format[], Float:x, Float:y, Float:width, bool:cancelSelectSound = false, OPEN_MP_TAGS:...)`
 * **`bool:`HideCurrentMenu**`(playerid)`
 
 # Example

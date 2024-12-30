@@ -345,7 +345,7 @@ hook OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys) {
             gMenuCooldown[playerid] = GetTickCount();
 
             DestroyMenuTextDrawInternal(playerid);
-            
+
             PlayerPlaySound(playerid, MENU_SOUND_CLOSE, 0.0, 0.0, 0.0);
             @.cb(MENU_RESPONSE_CLOSE, gMenuListItem[playerid]);
         }
@@ -354,6 +354,10 @@ hook OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys) {
 
             DestroyMenuTextDrawInternal(playerid);
             
+            if (!gMenuCancelSelectSound[playerid]) {
+                PlayerPlaySound(playerid, MENU_SOUND_SELECT, 0.0, 0.0, 0.0);
+            }
+
             @.cb(MENU_RESPONSE_SELECT, gMenuListItem[playerid]);
         }
 
