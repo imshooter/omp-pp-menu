@@ -5,7 +5,14 @@ Include in your code and begin using the library:
 #include <pp-menu>
 ```
 
-# Functions
+### Responses
+
+* `MENU_RESPONSE_UP`
+* `MENU_RESPONSE_DOWN`
+* `MENU_RESPONSE_SELECT`
+* `MENU_RESPONSE_CLOSE`
+
+### Functions
 
 * **`bool:`AddItemToMenu**`(playerid, column, const format[], OPEN_MP_TAGS:...)`
 * **`bool:`ShowMenuCallback**`(playerid, Func:cb<ii>, const format[], Float:x, Float:y, Float:width, OPEN_MP_TAGS:...)`
